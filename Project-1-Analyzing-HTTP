@@ -1,2 +1,111 @@
-git clone https://github.com/Nursezim/Project-1-Analyzing-HTTP.git
-cd Project-1-Analyzing-HTTP
+# HTTP Traffic Analysis Report
+
+## Capture Overview
+- **Date:** 31 May 2026
+- **Time:** 07:57:06 GMT
+- **Interface:** Wi-Fi / Ethernet
+- **Total Packets:** 17 Reassembled TCP Segments
+- **Total Data Size:** 50,069 bytes
+- **Tool Used:** Wireshark
+
+
+
+---
+
+## Screenshot 1 - Wireshark Capture Overview
+![Wireshark Capture Overview](../screenshots/01_capture_overview.png)
+> *Full Wireshark capture window showing all packets*
+
+---
+
+## HTTP Request Analysis
+- **Method:** GET
+- **Host:** Microsoft File Streaming Service
+- **Request URI:** /filestreamingservice/files/cdca748d-949b-4e...
+- **Request Frame:** #11
+- **Response Time:** 243.619600 milliseconds
+- **Connection:** keep-alive
+
+---
+
+## Screenshot 2 - HTTP Request Details
+![HTTP Request](../screenshots/02_http_request.png)
+> *Wireshark showing HTTP GET request details*
+
+---
+
+## HTTP Response Analysis
+- **Status Code:** 206 Partial Content
+- **Content-Type:** application/x-chrome-extension
+- **Content-Length:** 49,563 bytes
+- **Content-Range:** bytes 35717-85279 / 186331 total bytes
+- **Accept-Ranges:** bytes
+- **Cache-Control:** public, max-age=17280000
+- **ETag:** "eanGC9K8CY6W6DI8b7rUEYYTqxw="
+- **Last-Modified:** Wed, 22 Apr 2026 16:00:31 GMT
+- **Date:** Sun, 31 May 2026 07:57:06 GMT
+- **Server Location:** Poland (X-CCC: PL)
+- **Connection:** keep-alive
+
+---
+
+## Screenshot 3 - HTTP Response Headers
+![HTTP Response Headers](../screenshots/03_http_response_headers.png)
+> *Wireshark showing full HTTP 206 response headers*
+
+---
+
+## Screenshot 4 - HTTP Status Code 206
+![HTTP Status Code](../screenshots/04_status_code_206.png)
+> *Wireshark highlighting the 206 Partial Content status*
+
+---
+
+## Screenshot 5 - TCP Segments
+![TCP Segments](../screenshots/05_tcp_segments.png)
+> *Wireshark showing 17 reassembled TCP segments totaling 50,069 bytes*
+
+---
+
+## Screenshot 6 - Follow TCP Stream
+![TCP Stream](../screenshots/06_tcp_stream.png)
+> *Full TCP stream view of the HTTP conversation*
+
+---
+
+## Findings
+- The server returned **206 Partial Content** meaning the file was downloaded in chunks
+- The file being transferred is a **Chrome Extension (.crx)** file
+- Total file size is **186,331 bytes** but only partial data was captured in this session
+- Traffic was sent over **plain HTTP (unencrypted)**
+- All headers and file contents are **fully visible** in the capture
+- **Sensitive Microsoft tracking headers** were visible including:
+  - MS-CorrelationId: 1142fdc1-8778-4641-bc1d-854339a3c725
+  - MS-RequestId: ba649523-5165-49be-98b8-f5335e5c81d1
+- HTTP is **insecure compared to HTTPS** as anyone on the network can read the traffic
+- Server is located in **Poland** via Microsoft CDN
+
+---
+
+## Screenshot 7 - Microsoft Tracking Headers
+![Tracking Headers](../screenshots/07_tracking_headers.png)
+> *Wireshark showing visible Microsoft Correlation and Request IDs*
+
+---
+
+## Screenshot 8 - Unencrypted Traffic Warning
+![Unencrypted Traffic](../screenshots/08_unencrypted_traffic.png)
+> *Wireshark showing plain HTTP unencrypted data*
+
+---
+
+## Tools Used
+- Wireshark
+- Git
+- GitHub
+
+---
+
+*Analyst: [Your Name]*  
+*Date: 31 May 2026*  
+*Project: Project-1-Analyzing-HTTP*
